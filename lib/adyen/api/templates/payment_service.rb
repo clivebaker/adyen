@@ -56,13 +56,13 @@ EOS
 
       # @private
       CARD_PARTIAL = <<EOS
-        <payment:card>
-          <payment:holderName>%s</payment:holderName>
-          <payment:number>%s</payment:number>
-          <payment:cvc>%s</payment:cvc>
-          <payment:expiryYear>%s</payment:expiryYear>
-          <payment:expiryMonth>%02d</payment:expiryMonth>
-        </payment:card>
+        <ns1:card>
+          <ns1:holderName>%s</ns1:holderName>
+          <ns1:number>%s</ns1:number>
+          <ns1:cvc>%s</ns1:cvc>
+          <ns1:expiryYear>%s</ns1:expiryYear>
+          <ns1:expiryMonth>%02d</ns1:expiryMonth>
+        </ns1:card>
 EOS
 
       # @private
@@ -83,21 +83,21 @@ EOS
 
       # @private
       ONE_CLICK_PAYMENT_BODY_PARTIAL = <<EOS
-        <payment:recurring>
-          <payment:contract>ONECLICK</payment:contract>
-        </payment:recurring>
-        <payment:selectedRecurringDetailReference>%s</payment:selectedRecurringDetailReference>
-        <payment:card>
-          <payment:cvc>%s</payment:cvc>
-        </payment:card>
+        <ns1:recurring>
+          <ns1:contract>ONECLICK</ns1:contract>
+        </ns1:recurring>
+        <ns1:selectedRecurringDetailReference>%s</ns1:selectedRecurringDetailReference>
+        <ns1:card>
+          <ns1:cvc>%s</ns1:cvc>
+        </ns1:card>
 EOS
 
       # @private
       SHOPPER_PARTIALS = {
-        :reference => '        <payment:shopperReference>%s</payment:shopperReference>',
-        :email     => '        <payment:shopperEmail>%s</payment:shopperEmail>',
-        :ip        => '        <payment:shopperIP>%s</payment:shopperIP>',
-        :statement => '        <payment:shopperStatement>%s</payment:shopperStatement>',
+        :reference => '        <ns1:shopperReference>%s</ns1:shopperReference>',
+        :email     => '        <ns1:shopperEmail>%s</ns1:shopperEmail>',
+        :ip        => '        <ns1:shopperIP>%s</ns1:shopperIP>',
+        :statement => '        <ns1:shopperStatement>%s</ns1:shopperStatement>',
       }
     end
   end
