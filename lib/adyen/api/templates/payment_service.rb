@@ -19,8 +19,8 @@ EOS
         def modification_request_with_amount(method)
           modification_request(method, <<EOS)
         <ns1:modificationAmount>
-          <currency>%s</currency>
-          <value>%s</value>
+          <currency xmlns="http://common.services.adyen.com">%s</currency>
+          <value xmlns="http://common.services.adyen.com">%s</value>
         </ns1:modificationAmount>
 EOS
         end
@@ -48,9 +48,9 @@ EOS
 
       # @private
       AMOUNT_PARTIAL = <<EOS
-        <amount>
-          <currency>%s</currency>
-          <value>%s</value>
+        <amount xmlns="http://payment.services.adyen.com">
+          <currency  xmlns="http://common.services.adyen.com">%s</currency>
+          <value  xmlns="http://common.services.adyen.com">%s</value>
         </amount>
 EOS
 
