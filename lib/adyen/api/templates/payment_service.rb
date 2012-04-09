@@ -6,22 +6,22 @@ module Adyen
 
         def modification_request(method, body = nil)
           return <<EOS
-    <ns1:#{method} xmlns:ns1="http://payment.services.adyen.com">
-      <ns1:modificationRequest>
-        <ns1:merchantAccount>%s</ns1:merchantAccount>
-        <ns1:originalReference>%s</ns1:originalReference>
+    <payment:#{method} xmlns:payment="http://payment.services.adyen.com" xmlns:recurring="http://recurring.services.adyen.com" xmlns:common="http://common.services.adyen.com">
+      <payment:modificationRequest>
+        <payment:merchantAccount>%s</payment:merchantAccount>
+        <payment:originalReference>%s</payment:originalReference>
         #{body}
-      </ns1:modificationRequest>
-    </ns1:#{method}>
+      </payment:modificationRequest>
+    </payment:#{method}>
 EOS
         end
 
         def modification_request_with_amount(method)
           modification_request(method, <<EOS)
-        <ns1:modificationAmount>
-          <currency xmlns="http://common.services.adyen.com">%s</currency>
-          <value xmlns="http://common.services.adyen.com">%s</value>
-        </ns1:modificationAmount>
+        <payment:modificationAmount>
+          <common:currency>%s</common:currency>
+          <common:value>%s</common:value>
+        </payment:modificationAmount>
 EOS
         end
       end
@@ -37,67 +37,67 @@ EOS
 
       # @private
       LAYOUT = <<EOS
-    <ns1:authorise xmlns:ns1="http://payment.services.adyen.com">
-      <ns1:paymentRequest>
-        <ns1:merchantAccount>%s</ns1:merchantAccount>
-        <ns1:reference>%s</ns1:reference>
+    <payment:authorise xmlns:payment="http://payment.services.adyen.com" xmlns:recurring="http://recurring.services.adyen.com" xmlns:common="http://common.services.adyen.com">
+      <payment:paymentRequest>
+        <payment:merchantAccount>%s</payment:merchantAccount>
+        <payment:reference>%s</payment:reference>
 %s
-      </ns1:paymentRequest>
-    </ns1:authorise>
+      </payment:paymentRequest>
+    </payment:authorise>
 EOS
 
       # @private
       AMOUNT_PARTIAL = <<EOS
-        <amount xmlns="http://payment.services.adyen.com">
-          <currency  xmlns="http://common.services.adyen.com">%s</currency>
-          <value  xmlns="http://common.services.adyen.com">%s</value>
-        </amount>
+        <payment:amount>
+          <common:currency>%s</common:currency>
+          <common:value>%s</common:value>
+        </payment:amount>
 EOS
 
       # @private
       CARD_PARTIAL = <<EOS
-        <ns1:card>
-          <ns1:holderName>%s</ns1:holderName>
-          <ns1:number>%s</ns1:number>
-          <ns1:cvc>%s</ns1:cvc>
-          <ns1:expiryYear>%s</ns1:expiryYear>
-          <ns1:expiryMonth>%02d</ns1:expiryMonth>
-        </ns1:card>
+        <payment:card>
+          <payment:holderName>%s</payment:holderName>
+          <payment:number>%s</payment:number>
+          <payment:cvc>%s</payment:cvc>
+          <payment:expiryYear>%s</payment:expiryYear>
+          <payment:expiryMonth>%02d</payment:expiryMonth>
+        </payment:card>
 EOS
 
       # @private
       ENABLE_RECURRING_CONTRACTS_PARTIAL = <<EOS
-        <ns1:recurring>
-          <ns1:contract>RECURRING,ONECLICK</ns1:contract>
-        </ns1:recurring>
+        <payment:recurring>
+          <payment:contract>RECURRING,ONECLICK</payment:contract>
+        </payment:recurring>
 EOS
 
       # @private
       RECURRING_PAYMENT_BODY_PARTIAL = <<EOS
-        <ns1:recurring>
-          <ns1:contract>RECURRING</ns1:contract>
-        </ns1:recurring>
-        <ns1:selectedRecurringDetailReference>%s</ns1:selectedRecurringDetailReference>
-        <ns1:shopperInteraction>ContAuth</ns1:shopperInteraction>
+        <payment:recurring>
+          <payment:contract>RECURRING</payment:contract>
+        </payment:recurring>
+        <payment:selectedRecurringDetailReference>%s</payment:selectedRecurringDetailReference>
+        <payment:shopperInteraction>ContAuth</payment:shopperInteraction>
 EOS
 
       # @private
       ONE_CLICK_PAYMENT_BODY_PARTIAL = <<EOS
-        <ns1:recurring>
-          <ns1:contract>ONECLICK</ns1:contract>
-        </ns1:recurring>
-        <ns1:selectedRecurringDetailReference>%s</ns1:selectedRecurringDetailReference>
-        <ns1:card>
-          <ns1:cvc>%s</ns1:cvc>
-        </ns1:card>
+        <payment:recurring>
+          <payment:contract>ONECLICK</payment:contract>
+        </payment:recurring>
+        <payment:selectedRecurringDetailReference>%s</payment:selectedRecurringDetailReference>
+        <payment:card>
+          <payment:cvc>%s</payment:cvc>
+        </payment:card>
 EOS
 
       # @private
       SHOPPER_PARTIALS = {
-        :reference => '        <ns1:shopperReference>%s</ns1:shopperReference>',
-        :email     => '        <ns1:shopperEmail>%s</ns1:shopperEmail>',
-        :ip        => '        <ns1:shopperIP>%s</ns1:shopperIP>',
-        :statement => '        <ns1:shopperStatement>%s</ns1:shopperStatement>',
+        :reference => '        <payment:shopperReference>%s</payment:shopperReference>',
+        :email     => '        <payment:shopperEmail>%s</payment:shopperEmail>',
+        :ip        => '        <payment:shopperIP>%s</payment:shopperIP>',
+        :statement => '        <payment:shopperStatement>%s</payment:shopperStatement>',
       }
     end
   end
