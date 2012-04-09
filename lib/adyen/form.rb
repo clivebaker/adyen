@@ -29,7 +29,10 @@ module Adyen
 
     # The URL of the Adyen payment system that still requires the current
     # Adyen enviroment and payment flow to be filled.
-    ACTION_URL = "https://%s.adyen.com/hpp/%s.shtml"
+    #ACTION_URL = "https://%s.adyen.com/hpp/%s.shtml"
+    
+    #Barclays URL
+    ACTION_URL = "https://%s.barclaycardsmartpay.com/hpp/%s.shtml"
 
     # Returns the URL of the Adyen payment system, adjusted for an Adyen environment.
     #
