@@ -6,10 +6,10 @@ module Adyen
 
         def modification_request(method, body = nil)
           return <<EOS
-    <ns1:#{method} xmlns:payment="http://payment.services.adyen.com" xmlns:recurring="http://recurring.services.adyen.com" xmlns:common="http://common.services.adyen.com">
+    <ns1:#{method} xmlns:ns1="http://payment.services.adyen.com">
       <ns1:modificationRequest>
-        <ns1:merchantAccount>%s</payment:merchantAccount>
-        <ns1:originalReference>%s</payment:originalReference>
+        <ns1:merchantAccount>%s</ns1:merchantAccount>
+        <ns1:originalReference>%s</ns1:originalReference>
         #{body}
       </ns1:modificationRequest>
     </ns1:#{method}>
@@ -19,8 +19,8 @@ EOS
         def modification_request_with_amount(method)
           modification_request(method, <<EOS)
         <ns1:modificationAmount>
-          <common:currency>%s</common:currency>
-          <common:value>%s</common:value>
+          <currency>%s</currency>
+          <value>%s</value>
         </ns1:modificationAmount>
 EOS
         end
@@ -37,7 +37,7 @@ EOS
 
       # @private
       LAYOUT = <<EOS
-    <ns1:authorise xmlns:payment="http://payment.services.adyen.com" xmlns:recurring="http://recurring.services.adyen.com" xmlns:common="http://common.services.adyen.com">
+    <ns1:authorise xmlns:ns1="http://payment.services.adyen.com">
       <ns1:paymentRequest>
         <ns1:merchantAccount>%s</ns1:merchantAccount>
         <ns1:reference>%s</ns1:reference>
