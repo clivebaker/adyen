@@ -38,7 +38,8 @@ module Adyen
     #
     class PaymentService < SimpleSOAPClient
       # The Adyen Payment SOAP service endpoint uri.
-      ENDPOINT_URI = 'https://pal-%s.adyen.com/pal/servlet/soap/Payment'
+      #ENDPOINT_URI = 'https://pal-%s.adyen.com/pal/servlet/soap/Payment'
+      ENDPOINT_URI = 'https://pal-%s.barclaycardsmartpay.com/pal/servlet/soap/Payment'
 
       # @see API.authorise_payment
       def authorise_payment
