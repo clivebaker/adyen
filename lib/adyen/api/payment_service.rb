@@ -48,9 +48,9 @@ module Adyen
 
       # @see API.authorise_recurring_payment
       def authorise_recurring_payment
-      puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-      puts authorise_recurring_payment_request_body
-      puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+     # puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+     # puts authorise_recurring_payment_request_body
+     # puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
         make_payment_request(authorise_recurring_payment_request_body, AuthorisationResponse)
       end
 
